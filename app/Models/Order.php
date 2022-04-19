@@ -9,11 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'total_amount', 'payment_method', 'order_number', 'address_1', 'address_2', 'city', 'country', 'postal_code'];
+    protected $fillable = ['user_id', 'total_amount', 'payment_method', 'order_number', 'address_1', 'address_2', 'city', 'country', 'postal_code', 'status'];
 
     public function orderDetails()
     {
-        return $this->hasMany('App\Models\OrderDetail');
+        return $this->hasMany('App\Models\OrderDetail', 'order_id');
     }
 
     public function user()

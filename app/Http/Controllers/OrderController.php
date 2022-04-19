@@ -50,7 +50,14 @@ class OrderController extends BaseController
      */
     public function store(OrderRequest $request)
     {
-        //
+        $request['order_number'] = rand();
+        $order = $this->order->create($request->all());
+        foreach ($request->products as $product) {
+            $product['user_id'] = $request->user_id;
+            $order->orderDetails()->create($product);
+        }
+        $order->load('orderDetails.product');
+        return $this->handleResponse(new OrderResource($order), 'orders have been created!');
     }
 
     /**

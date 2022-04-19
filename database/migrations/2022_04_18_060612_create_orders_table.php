@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('country');
             $table->string('postal_code')->nullable();
+            $table->enum('status', ['Pending', 'Accept', 'Shipped', 'Completed'])->default('Pending');
             $table->timestamps();
         });
     }
